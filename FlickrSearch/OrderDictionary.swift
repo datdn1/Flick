@@ -43,4 +43,8 @@ struct OrderedDictionary<KeyType: Hashable, ValueType> {
         let value = self.dictionary.removeValueForKey(key)!
         return (key, value)
     }
+    
+    var count:Int {
+        return self.array.count
+    }
 }
