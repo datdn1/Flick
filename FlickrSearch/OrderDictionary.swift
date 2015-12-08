@@ -47,4 +47,34 @@ struct OrderedDictionary<KeyType: Hashable, ValueType> {
     var count:Int {
         return self.array.count
     }
+    
+    subscript(key: KeyType) -> ValueType? {
+        get {
+            return self.dictionary[key]
+        }
+        set {
+            if let _ = self.array.indexOf(key) {
+                
+            }
+            else {
+                self.array.append(key)
+            }
+            self.dictionary[key] = newValue
+        }
+    }
+    
+    subscript(index: Int) -> (KeyType, ValueType) {
+        get {
+            precondition(index < self.array.count, "Index out-of-bound")
+            let key = self.array[index]
+            let value = self.dictionary[key]!
+            return (key, value)
+        }
+        set {
+            precondition(index < self.array.count, "Index out-of-bound")
+            let (key, value) = newValue
+            self.array[index] = key
+            self.dictionary[key] = value
+        }
+    }
 }
